@@ -3,13 +3,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
 public class DFSOperator {
-	private static final String ROOT_PATH = "hdfs:///";
+	private static final String ROOT_PATH = "hdfs://172.168.2.9:9000/";
 	private static final int BUFFER_SIZE = 4096;
 	/**
 	* construct.
@@ -28,8 +30,8 @@ public class DFSOperator {
 	//String uri = "hdfs://172.168.2.9:9000";
 	//FileSystem fs1 = FileSystem.get(URI.create(uri), conf);
 	Configuration conf = new Configuration();
-	FileSystem fs = FileSystem.get(conf);
-	Path f = new Path(ROOT_PATH + path);
+	FileSystem fs = FileSystem.get(URI.create(ROOT_PATH),conf);
+	Path f = new Path(path);
 	fs.create(f, overwrite);
 	fs.close();
 	return true;
@@ -48,8 +50,8 @@ public class DFSOperator {
 	//String uri = "hdfs://192.168.1.100:9000";
 	//FileSystem fs1 = FileSystem.get(URI.create(uri), conf);
 	Configuration conf = new Configuration();
-	FileSystem fs = FileSystem.get(conf);
-	Path f = new Path(ROOT_PATH + path);
+	FileSystem fs = FileSystem.get(URI.create(ROOT_PATH),conf);
+	Path f = new Path(path);
 	fs.delete(f, recursive);
 	fs.close();
 	return true;
@@ -65,8 +67,8 @@ public class DFSOperator {
 	public static String readDFSFileToString(String path) throws IOException
 	{
 	Configuration conf = new Configuration();
-	FileSystem fs = FileSystem.get(conf);
-	Path f = new Path(ROOT_PATH + path);
+	FileSystem fs = FileSystem.get(URI.create(ROOT_PATH),conf);
+	Path f = new Path(path);
 	InputStream in = null;
 	String str = null;
 	StringBuilder sb = new StringBuilder(BUFFER_SIZE);
@@ -101,9 +103,9 @@ public class DFSOperator {
 	public static boolean writeStringToDFSFile(String path, String string) throws IOException
 	{
 	Configuration conf = new Configuration();
-	FileSystem fs = FileSystem.get(conf);
+	FileSystem fs = FileSystem.get(URI.create(ROOT_PATH),conf);
 	FSDataOutputStream os = null;
-	Path f = new Path(ROOT_PATH + path);
+	Path f = new Path(path);
 	os = fs.create(f,true);
 	os.writeBytes(string);
 	os.close();

@@ -17,6 +17,12 @@ public class WordCount {
 		//构建Job对象
 		Job job=new Job(new Configuration());
 		
+//		Configuration conf=new Configuration();
+//		conf.addResource("E:\\Hadoop\\hadoop-1.0.3\\conf\\mapred-site.xml");
+//		conf.addResource("E:\\Hadoop\\hadoop-1.0.3\\conf\\hdfs-site.xml");
+//		conf.addResource("E:\\Hadoop\\hadoop-1.0.3\\conf\\core-site.xml");
+
+		
 		//注意：设置main方法所在的类
 		job.setJarByClass(WordCount.class);
 		
@@ -24,15 +30,14 @@ public class WordCount {
 		job.setMapperClass(WCMapper.class);
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(LongWritable.class);
-		String uri="hdfs://localhost:9000/home/hadoop/students2";
-		FileInputFormat.setInputPaths(job, new Path(uri));
+		FileInputFormat.setInputPaths(job, new Path("hdfs://172.168.2.9:9000/home/hadoop/students2"));
 		
 		//设置Reducer相关属性
 		job.setReducerClass(WCReducer.class);
 		//setOutputKeyClass既适用于Mapper，也适用于Reducer
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
-		FileOutputFormat.setOutputPath(job, new Path("hdfs://localhost:9000/home/hadoop/students2_count"));
+		FileOutputFormat.setOutputPath(job, new Path("hdfs://172.168.2.9:9000/home/hadoop/students2_count"));
 		
 		//打印进度和详情
 		job.waitForCompletion(true);

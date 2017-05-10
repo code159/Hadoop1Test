@@ -11,7 +11,7 @@ import org.apache.hadoop.fs.Path;
 public class FileStatusTest {
 	private static Configuration conf=new Configuration();
 	private static FileSystem fs=null;
-	private static String uri="hdfs://localhost:9000/";
+	private static String uri="hdfs://172.168.2.9:9000/";
 	private static String isDir=null;
 	
 	public static void main(String[] args) throws IOException{

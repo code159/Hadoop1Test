@@ -23,7 +23,7 @@ public class FileSystemTest {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException{
-		String uri="hdfs://localhost:9000/";
+		String uri="hdfs://172.168.2.9:9000/";
 		Configuration conf = new Configuration();
 		FileSystem fs = FileSystem.get(URI.create(uri),conf);
 		
