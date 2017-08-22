@@ -31,14 +31,14 @@ public class WordCount {
 		job.setMapperClass(WCMapper.class);
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(LongWritable.class);
-		FileInputFormat.setInputPaths(job, new Path("hdfs://CloudFirst:9000/data/words.dat"));
+		FileInputFormat.setInputPaths(job, new Path("hdfs://CloudFirst:9000/test/words.dat"));
 		
 		//设置Reducer相关属性
 		job.setReducerClass(WCReducer.class);
 		//setOutputKeyClass既适用于Mapper，也适用于Reducer
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
-		FileOutputFormat.setOutputPath(job, new Path("hdfs://CloudFirst:9000/test/out5"));
+		FileOutputFormat.setOutputPath(job, new Path("hdfs://CloudFirst:9000/out/out4"));
 		
 		//打印进度和详情
 		job.waitForCompletion(true);
