@@ -15,7 +15,7 @@ public class WCMapper extends Mapper<LongWritable, Text, Text, LongWritable>{
 		//接收数据V1
 		String line=value.toString();
 		//切分数据
-		String[] words=line.split("\t");
+		String[] words=line.split(" ");
 		//循环
 		for(String w:words){
 			//出现一次，即记作一，输出
